@@ -2,6 +2,8 @@ import React from "react";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
 
+import "./components/TodoComponents/Todo.css";
+
 const listData = [
   {
     task: "Organize Garage",
@@ -37,12 +39,27 @@ class App extends React.Component {
     });
   };
 
+  toggleTask = id => {
+    this.setState({
+      list: this.state.list.map(task => {
+        if (task.id === id) {
+          return {
+            ...task,
+            completed: !task.completed
+          };
+        } else {
+          return task;
+        }
+      })
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>To-Do List</h1>
         <TodoForm addTask={this.addTask} />
-        <TodoList list={this.state.list} />
+        <TodoList list={this.state.list} toggleTask={this.toggleTask} />
       </div>
     );
   }
