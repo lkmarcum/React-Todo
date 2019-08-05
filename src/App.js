@@ -24,6 +24,18 @@ class App extends React.Component {
       list: listData
     };
   }
+
+  addItem = itemName => {
+    const newItem = {
+      task: itemName,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      list: [...this.state.list, newItem]
+    });
+  };
+
   render() {
     return (
       <div className="App">
